@@ -1,14 +1,40 @@
 plugins { id 'java'; id 'net.minecraftforge.gradle' version '[6.0,6.2)' }
-version = '4.5.1-r4'
+
+// Single source of truth for the version: the jar file name and META-INF/mods.toml can no longer
+// drift apart (the build used to be 4.5.1-r4 while mods.toml claimed 4.5.1).
+ext {
+    mod_id = 'lootbagmod'
+    mod_name = 'Loot Bag - Renewed (Fixed Version)'
+    // This fork's own version. The upstream mod being fixed is 4.5.1 — see README.md.
+    mod_version = '4.6.0'
+    upstream_version = '4.5.1'
+    fork_maintainer = 'BarryAlen777'
+    fork_url = 'https://github.com/BarryAlen777/Loot-Bag---Renewed-Fixed-Version-'
+    minecraft_version = '1.20.1'
+    // Built against 47.4.0, but nothing in the sources needs it: the dependency range in
+    // mods.toml stays at [47,) so packs on 47.2/47.3 can still load it.
+    forge_version = '47.4.0'
+    forge_min_version = '47'
+}
+
+version = mod_version
 group = 'net.codersdownunder.lootbagmod'
 base { archivesName = 'lootbag-renewed-fixed' }
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 minecraft { mappings channel: 'official', version: '1.20.1' }
 dependencies { minecraft 'net.minecraftforge:forge:1.20.1-47.4.0' }
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+// Ship the licence with the jar: this is a modified redistribution under LGPL-3.0, so whoever
+// installs the file should also get the licence text and the modification notice.
+jar {
+    from('LICENSE') { into 'META-INF' }
+    from('README.md') { into 'META-INF' }
+}
 processResources {
-    def props = [mod_id: 'lootbagmod', mod_name: 'Loot Bag - Renewed (Fixed Version)', mod_version: '4.5.1',
-                 minecraft_version: '1.20.1', forge_version: '47.4.0']
+    def props = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version,
+                 upstream_version: upstream_version, fork_maintainer: fork_maintainer,
+                 fork_url: fork_url,
+                 minecraft_version: minecraft_version, forge_min_version: forge_min_version]
     inputs.properties props
     filteringCharset = 'UTF-8'
     filesMatching('META-INF/mods.toml') { expand props }

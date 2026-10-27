@@ -1,0 +1,4 @@
+{
+  "item.lootbagmod.lootbag": "战利品包",
+  "message.lootbagmod.no_loot": "当前战利品包没有可给的物品——请检查 lootbagmod 配置（包没有被消耗）"
+}

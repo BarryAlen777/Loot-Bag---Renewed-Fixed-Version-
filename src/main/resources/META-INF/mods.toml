@@ -1,16 +1,20 @@
 modLoader="javafml"
 loaderVersion="[47,)"
-license="LGPLv3"
+license="LGPL-3.0-or-later"
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
-authors="Trhod177s"
-description='''Adds loot bags that drop from mobs and dungeon chests. Use a loot bag to receive random loot.'''
+displayURL="${fork_url}"
+authors="Trhod177s (original); ${fork_maintainer} (fork maintainer)"
+credits="Original mod by Trhod177s. This bugfix fork is maintained by ${fork_maintainer} at ${fork_url}. Every change relative to upstream ${upstream_version} is listed in META-INF/README.md, as required by LGPL-3.0 section 4."
+description='''Adds loot bags that drop from mobs and dungeon chests. Use a loot bag to receive random loot.
+
+This fixed version: bags are consumed in survival/adventure, drop rates are no longer doubled by a duplicate event listener, loot goes into the inventory (empty first slot included) instead of scattering, bags can no longer be swallowed by an empty or misspelled item list, spawn eggs and creative/admin blocks are never handed out, villagers and golems are no longer farmable for bags, and buried treasure / end city chests actually get their configured injection. See META-INF/README.md for the list of changes and LICENSE for the licence.'''
 [[dependencies.${mod_id}]]
 modId="forge"
 mandatory=true
-versionRange="[${forge_version},)"
+versionRange="[${forge_min_version},)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.${mod_id}]]

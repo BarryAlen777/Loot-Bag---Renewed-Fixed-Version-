@@ -1,3 +1,4 @@
 {
-  "item.lootbagmod.lootbag": "Loot Bag"
+  "item.lootbagmod.lootbag": "Loot Bag",
+  "message.lootbagmod.no_loot": "No items are available from loot bags right now - check the lootbagmod config (the bag was not used up)"
 }
