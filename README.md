@@ -26,7 +26,6 @@ Minecraft 1.20.1 / Forge（`javafml`，构建于 47.4.0，依赖范围放宽到 
 | 默认黑名单 | `minecraft:spawn_egg`、`minecraft:mob_spawner` 在 1.20.1 不存在，刷怪蛋根本没被挡住 |
 | 死资源 | `buried_treasure.json` / `end_city_treasure.json` 没接进代码；`lootbagdrops.json` 无人引用 |
 | 创造模式物品栏 | 物品不在任何 Tab 里，只能 `/give` |
-| 版本号 | jar 名 `4.5.1-r4` 与 mods.toml 的 `4.5.1` 不一致（现由 `build.gradle` 的 `mod_version` 统一输出） |
 
 ## 许可证与署名
 
@@ -37,7 +36,7 @@ jar 内 `META-INF/README.md` 带着同一张表，不依赖 git 提交记录做�
 修改由本分支维护者 **BarryAlen777**（<https://github.com/BarryAlen777/Loot-Bag---Renewed-Fixed-Version->）完成，
 原始版权与作者署名（Trhod177s）在 `src/main/resources/META-INF/mods.toml` 的 `authors` 中保留。
 
-## 数值与默认行为（和旧版不一样，别当成又出 bug）
+## 数值与默认行为（和旧版不一样）
 
 事件监听以前注册了两遍，修掉之后每个概率只算一次，回到配置文件本来的量：
 
@@ -50,22 +49,13 @@ jar 内 `META-INF/README.md` 带着同一张表，不依赖 git 提交记录做�
 
 ## 新增的配置项
 
-`config/lootbagmod-common.toml` 里多了两个开关，旧的配置文件照常能读：
+`config/lootbagmod-common.toml` 里多了两个配置，旧的配置文件依旧可以读取：
 
 | 键 | 默认 | 作用 |
 |---|---|---|
 | `excludeadminitems` | `true` | 硬挡刷怪蛋、命令方块、刷怪笼、屏障、基岩等管理用物品，与黑名单无关 |
-| `excludevillagersandgolems` | `true` | 上一条说的村民/傀儡排除 |
+| `excludevillagersandgolems` | `true` | 上面说的村民/傀儡排除 |
 
-## 构建
-
-```bash
-gradle build     # 产物：build/libs/lootbag-renewed-fixed-4.6.0.jar
-```
-
-需要 JDK 17 和 Gradle 8.x（ForgeGradle 6.0–6.2）。仓库里不含 Gradle Wrapper。
-`gradle.properties` 里的 `org.gradle.java.installations.paths` 是构建容器用的本地 JDK 路径，
-自己在别的机器上构建时删掉那一行即可（Gradle toolchain 会自动找 JDK 17）。
 
 ## 安装
 
@@ -82,5 +72,5 @@ gradle build     # 产物：build/libs/lootbag-renewed-fixed-4.6.0.jar
 | 版本 | 内容 |
 |---|---|
 | **4.6.0** | 按复审报告修完全部残留项：村民/铁傀儡/雪傀儡/流浪商人不再被 `allNonHostileMobs` 刷包（新增 `excludevillagersandgolems`，默认开启）；掠夺等级相乘不再 int 溢出；配置池为空时开包会在动作栏给出提示而不是空挥；删掉永远走不到的冗余判断；署名与改动说明不再依赖 git 提交记录；标注分支维护者与仓库地址 |
-| 4.5.1-r4 | 修掉生存模式不消耗包、事件监听重复注册、客户端重复开包、空背包撒地上、余量丢失、吞异常吃包、配置热重载、默认黑名单写错 ID 等问题 |
+| 4.5.1 | 修掉生存模式不消耗包、事件监听重复注册、客户端重复开包、空背包撒地上、余量丢失、吞异常吃包、配置热重载、默认黑名单写错 ID 等问题 |
 | 原版 4.5.1 | Trhod177s 的 Loot Bag Renewed |
